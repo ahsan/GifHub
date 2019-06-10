@@ -1,12 +1,30 @@
 import React from "react";
+import { connect } from "react-redux";
+import { getSearchStringState } from "../redux/selectors";
 import "../App.css";
 
-function GHBody() {
-  return (
-    <div className="Body">
-        Body
-    </div>
-  );
+class GHBody extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log('Props: ', props);
+    // this.state = { input: "" };
+  }
+
+  render() {
+    return (
+      <div className="Body">
+          {this.props.searchString}
+      </div>
+    )
+  }
 }
 
-export default GHBody;
+const mapStateToProps = state => {
+  const searchState = getSearchStringState(state);
+  const { searchString } = searchState;
+  console.log('mstp: ', searchString);
+  return { searchString };
+}
+
+export default connect(mapStateToProps)(GHBody);
+// export default GHBody;
