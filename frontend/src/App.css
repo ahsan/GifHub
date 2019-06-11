@@ -7,7 +7,7 @@
 .Body {
   background-color: #282c34;
   flex: 1 1 auto;
-  color: white;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .Login {
@@ -15,4 +15,8 @@
   background-color: #282c34;
   flex: 1 1 auto;
   color: white;
+}
+
+.flex-auto {
+  flex: auto;
 }
