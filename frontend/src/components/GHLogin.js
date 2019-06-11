@@ -33,27 +33,34 @@ class GHLogin extends React.Component {
 
   render() {
     return (
-      <div className="Login">
-        <GoogleLogin
-          clientId="518612383701-2tu29utlsn3iilso25s8jdt6t1d6mkjs.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={response => this.responseGoogle(response)}
-          onFailure={response => this.responseGoogle(response)}
-          cookiePolicy={"single_host_origin"}
-        />
-
-        <GoogleLogout
-          buttonText="Logout"
-          onLogoutSuccess={response => this.logoutHandler(response)}
-        >
-        </GoogleLogout>
+      <div className="Login pt-3">
+        {
+          this.props.userLoggedIn ?
+          <GoogleLogout
+            buttonText="Logout"
+            onLogoutSuccess={response => this.logoutHandler(response)}
+          >
+          </GoogleLogout> :
+          <GoogleLogin
+            clientId="518612383701-2tu29utlsn3iilso25s8jdt6t1d6mkjs.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={response => this.responseGoogle(response)}
+            onFailure={response => this.responseGoogle(response)}
+            cookiePolicy={"single_host_origin"}
+          />
+        }
       </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  const authState = getAuthState(state);
+  const { userLoggedIn } = authState;
+  return { userLoggedIn };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   { loginUser, logoutUser }
   )(GHLogin);
-// export default GHBody;
