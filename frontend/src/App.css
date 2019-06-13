@@ -20,3 +20,17 @@
 .flex-auto {
   flex: auto;
 }
+
+/* .mainBody {
+  margin: 2px 4px 2px 4px;
+} */
+
+img {
+  min-width: 100px;
+  max-width: 1000px;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+}

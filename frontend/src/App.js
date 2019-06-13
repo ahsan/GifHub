@@ -12,18 +12,6 @@ import GHLogin from "./components/GHLogin";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { input: "" };
-  }
-
-  updateInput = input => {
-    console.log('changing input');
-    this.setState({ input });
-  };
-
-  handleSearchChange() {
-    console.log(this.state.input);
-    this.props.setSearchString(this.state.input);
-    this.setState({ input: '' });
   }
 
   render() {
@@ -36,17 +24,15 @@ class App extends React.Component {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
                 <Link to="/">
-                  <Nav.Link href="javascript:void(0)">Home</Nav.Link>
+                  Home
                 </Link>
               </Nav>
               <Nav className="ml-auto">
                 <Link to="/login">
-                  <Nav.Link href="javascript:void(0)">
-                    {
-                      this.props.userLoggedIn ?
-                      this.props.userName : 'Login'
-                    }
-                  </Nav.Link>
+                  {
+                    this.props.userLoggedIn ?
+                    this.props.userName : 'Login'
+                  }
                 </Link>
               </Nav>
             </Navbar.Collapse>
@@ -66,7 +52,4 @@ const mapStateToProps = state => {
   return { userLoggedIn, userEmail, userName };
 }
 
-export default connect(
-  mapStateToProps,
-  { setSearchString }
-)(App);
+export default connect(mapStateToProps)(App);
