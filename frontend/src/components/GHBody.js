@@ -24,9 +24,9 @@ class GHBody extends React.Component {
     this.setState({ input });
   };
 
-  handleSearchChange() {
+  handleSearch() {
     this.props.setSearchString(this.state.input);
-    this.setState({ input: '', images:[] });
+    this.setState({ images:[] });
     this.searchGif(this.state.input);
   }
 
@@ -46,6 +46,15 @@ class GHBody extends React.Component {
     });
   }
 
+  handleKeyPress(e) {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+      this.handleSearch();
+    } else {
+      return '';
+    }
+  }
+
   render() {
     console.log(this.state.images);
     return (
@@ -61,11 +70,12 @@ class GHBody extends React.Component {
                 className="mr-sm-2 flex-auto"
                 onChange={e => this.updateInput(e.target.value)}
                 value={this.state.input}
+                onKeyDown={e => this.handleKeyPress(e)}
               />
               <Button
                 variant="outline-success"
                 className="ml-2"
-                onClick={e => this.handleSearchChange(e)}
+                onClick={e => this.handleSearch(e)}
               >Search</Button>
             </Form>
           </Container>
