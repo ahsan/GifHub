@@ -82,7 +82,7 @@ class GHBody extends React.Component {
         </Jumbotron>
 
         {/* Bottom Half */}
-        <Jumbotron className="m-4 px-1 p-2 flex-auto">
+        {/* <Jumbotron className="m-4 px-1 p-2 flex-auto">
           <Container className="mainBody">
             {
               this.state.images.length > 0 ? 
@@ -90,7 +90,14 @@ class GHBody extends React.Component {
                 'No Images'
             }
           </Container>
-        </Jumbotron>
+        </Jumbotron> */}
+        <div className="imageContainer">
+          {
+            this.state.images.length > 0 ? 
+              this.state.images.map(imageUrl => <GHImageCard url={imageUrl}/>) : 
+              <span className="text">No Images</span>
+          }
+        </div>
       </div>
     )
   }

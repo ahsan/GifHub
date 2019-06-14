@@ -33,4 +33,26 @@ img {
 .imageContainer {
   display: flex;
   justify-content: center;
+  font-size: 16px;
+}
+
+.text {
+  color: white;
+}
+.imageFrame {
+  padding: 10px;
+  background-color: white;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+}
+
+.favoriteIcon {
+  cursor: pointer;
+}
+
+.iconRow {
+  display: flex;
+  flex-direction: row;
+  /* flex-direction: row-reverse; */
 }
