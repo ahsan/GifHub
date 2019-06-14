@@ -95,7 +95,12 @@ class GHBody extends React.Component {
           {
             this.state.images.length > 0 ? 
               this.state.images.map(imageUrl => <GHImageCard url={imageUrl}/>) : 
-              <span className="text">No Images</span>
+              <span className="text">
+                {
+                  this.state.input == '' ?
+                  'No Images' : 'Loading...'
+                }
+              </span>
           }
         </div>
       </div>
