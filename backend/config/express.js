@@ -6,6 +6,7 @@
 */
 
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 /**
  *
@@ -18,6 +19,10 @@ module.exports = function(app) {
     extended: true
   }));
   app.use(bodyParser.json());
+
+  // allow cors
+  app.use(cors());
+  app.options('*', cors());
 
   // add morgan requests logger middleware
   require('./morgan')(app);

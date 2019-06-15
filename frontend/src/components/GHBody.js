@@ -7,16 +7,17 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
-import "../App.css";
 import axios from 'axios';
 import GHImageCard from './GHImageCard';
+import GHImageList from "./GHImageList";
 
 class GHBody extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
       images: [],
-      input: ''
+      input: '',
+      loading: false
     };
   }
 
@@ -26,7 +27,7 @@ class GHBody extends React.Component {
 
   handleSearch() {
     this.props.setSearchString(this.state.input);
-    this.setState({ images:[] });
+    this.setState({ images:[], loading: true });
     this.searchGif(this.state.input);
   }
 
@@ -37,8 +38,8 @@ class GHBody extends React.Component {
     .then(response => {
       console.log(response.data);
       this.setState({
-        // images: [response.data.results[0].media[0].gif.url]
-        images: response.data.results.map(result => result.media[0].gif.url)
+        images: response.data.results.map(result => result.media[0].gif.url),
+        loading: false
       })
     })
     .catch(error => {
@@ -56,7 +57,6 @@ class GHBody extends React.Component {
   }
 
   render() {
-    console.log(this.state.images);
     return (
       <div className="Body">
 
@@ -82,27 +82,16 @@ class GHBody extends React.Component {
         </Jumbotron>
 
         {/* Bottom Half */}
-        {/* <Jumbotron className="m-4 px-1 p-2 flex-auto">
-          <Container className="mainBody">
-            {
-              this.state.images.length > 0 ? 
-                this.state.images.map(imageUrl => <GHImageCard url={imageUrl}/>) : 
-                'No Images'
-            }
-          </Container>
-        </Jumbotron> */}
         <div className="imageContainer">
+          <GHImageList images={this.state.images}/>
           {
-            this.state.images.length > 0 ? 
-              this.state.images.map(imageUrl => <GHImageCard url={imageUrl} showIcon={this.props.userLoggedIn}/>) : 
-              <span className="text">
-                {
-                  this.state.input == '' ?
-                  'No Images' : 'Loading...'
-                }
-              </span>
+            this.state.loading &&
+            <span className="text">
+              Loading...
+            </span>
           }
         </div>
+
       </div>
     )
   }

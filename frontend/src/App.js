@@ -26,6 +26,12 @@ class App extends React.Component {
                 <Link to="/">
                   Home
                 </Link>
+                {
+                  this.props.userLoggedIn &&
+                  <Link to="/favorites" className="ml-2">
+                    Favorites
+                  </Link>
+                }
               </Nav>
               <Nav className="ml-auto">
                 <Link to="/login">

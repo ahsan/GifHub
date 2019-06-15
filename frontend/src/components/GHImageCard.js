@@ -2,7 +2,7 @@ import React from "react";
 import { Favorite, FavoriteBorderTwoTone } from "@material-ui/icons";
 
 class GHImageCard extends React.Component {
-  constructor({url, showIcon}) {
+  constructor({url, showIcon, handleIconClick}) {
     super({url, showIcon});
     this.state = {
       favorite: false
@@ -10,9 +10,9 @@ class GHImageCard extends React.Component {
   }
 
   toggleFavorite() {
-    this.setState({
-      favorite: !this.state.favorite
-    });
+    const nextState = !this.state.favorite;
+    this.setState({favorite: nextState});
+    this.props.handleIconClick(this.props.url, nextState);
   }
 
   render() {
@@ -23,12 +23,12 @@ class GHImageCard extends React.Component {
           this.props.showIcon &&
           <div className="iconRow mt-2">
           {
-            this.state.favorite ?
-            <Favorite
+            !this.state.favorite ?
+            <FavoriteBorderTwoTone
               className="favoriteIcon"
               onClick={e => this.toggleFavorite()}
-            />:
-            <FavoriteBorderTwoTone
+            /> :
+            <Favorite
               className="favoriteIcon"
               onClick={e => this.toggleFavorite()}
             />
