@@ -20,7 +20,7 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">GifHub</Navbar.Brand>
+            <Navbar.Brand href="#">GifHub</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
