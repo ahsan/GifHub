@@ -13,6 +13,7 @@ module.exports = function (app) {
     // bind routes to all api endpoints
     winston.debug(`Binding routes`);
     app.use(`/ping`, require(`../api/ping/ping.routes`));
+    app.use(`/user`, require(`../api/user/user.routes`));
 
     // default route
     app.route('/*').get((req, res) => {

@@ -121,24 +121,24 @@ const appendGifUrl = (userEmail, gifUrl) => {
 }
 
 const removeGif = (userEmail, toBeRemovedUrl) => {
-
-  getUser(userEmail).then((user) => {
-    console.log(user);
-    const newGifsList = user.gifUrls.filter((url) => url !== toBeRemovedUrl);
-    const params = {
-      TableName: tableName,
-      Key: { "email": userEmail },
-      ReturnValues: 'ALL_NEW',
-      UpdateExpression: 'set #gifUrlList = :gifsList',
-      ExpressionAttributeNames: {
-        '#gifUrlList': 'gifUrlList'
-      },
-      ExpressionAttributeValues: {
-        ':gifsList': newGifsList
-      }
-    };
+  return new Promise((resolve, reject) => {
+    getUser(userEmail).then((user) => {
+      console.log(user);
+      const newGifsList = user.gifUrlList.filter((url) => url !== toBeRemovedUrl);
+      console.log('New Gifs list: ', newGifsList);
+      const params = {
+        TableName: tableName,
+        Key: { "email": userEmail },
+        ReturnValues: 'ALL_NEW',
+        UpdateExpression: 'set #gifUrlList = :gifsList',
+        ExpressionAttributeNames: {
+          '#gifUrlList': 'gifUrlList'
+        },
+        ExpressionAttributeValues: {
+          ':gifsList': newGifsList
+        }
+      };
   
-    return new Promise((resolve, reject) => {
       dynamoDBDoc.update(params, (err, data) => {
         if (err) {
           winston.error(`Could not update user ${userEmail}.`);
@@ -147,6 +147,8 @@ const removeGif = (userEmail, toBeRemovedUrl) => {
           resolve(data);
         }
       })
+    
+      
     });
   });
 }
