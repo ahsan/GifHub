@@ -2,8 +2,8 @@ import React from "react";
 import { Favorite, FavoriteBorderTwoTone } from "@material-ui/icons";
 
 class GHImageCard extends React.Component {
-  constructor({url}) {
-    super({url});
+  constructor({url, showIcon}) {
+    super({url, showIcon});
     this.state = {
       favorite: false
     };
@@ -19,7 +19,9 @@ class GHImageCard extends React.Component {
     return (
       <div className="imageFrame mt-2">
         <img src={this.props.url}/>
-        <div className="iconRow mt-2">
+        {
+          this.props.showIcon &&
+          <div className="iconRow mt-2">
           {
             this.state.favorite ?
             <Favorite
@@ -32,6 +34,7 @@ class GHImageCard extends React.Component {
             />
           }
         </div>
+        }
       </div>
     );
   }

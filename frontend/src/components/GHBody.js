@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getSearchStringState } from "../redux/selectors";
+import { getSearchStringState, getAuthState } from "../redux/selectors";
 import { setSearchString } from "../redux/actions";
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Container from 'react-bootstrap/Container'
@@ -94,7 +94,7 @@ class GHBody extends React.Component {
         <div className="imageContainer">
           {
             this.state.images.length > 0 ? 
-              this.state.images.map(imageUrl => <GHImageCard url={imageUrl}/>) : 
+              this.state.images.map(imageUrl => <GHImageCard url={imageUrl} showIcon={this.props.userLoggedIn}/>) : 
               <span className="text">
                 {
                   this.state.input == '' ?
@@ -109,10 +109,9 @@ class GHBody extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const searchState = getSearchStringState(state);
-  const { searchString } = searchState;
-  console.log('mstp: ', searchString);
-  return { searchString };
+  const { userLoggedIn, userEmail } = getAuthState(state);
+  const { searchString } = getSearchStringState(state);
+  return { userLoggedIn, userEmail, searchString };
 }
 
 export default connect(
