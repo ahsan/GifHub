@@ -1,0 +1,36 @@
+{
+  "name": "gifhub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahsan/gifhub.git"
+  },
+  "author": "Abdullah Ahsan (ahsan.abdulah@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahsan/gifhub/issues"
+  },
+  "homepage": "https://github.com/ahsan/gifhub#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.0",
+    "morgan": "^1.9.1",
+    "node-cron": "^2.0.3",
+    "winston": "^3.1.0",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
