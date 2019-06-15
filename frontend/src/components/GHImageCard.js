@@ -2,10 +2,10 @@ import React from "react";
 import { Favorite, FavoriteBorderTwoTone } from "@material-ui/icons";
 
 class GHImageCard extends React.Component {
-  constructor({url, showIcon, handleIconClick}) {
-    super({url, showIcon});
+  constructor(props) {
+    super(props);
     this.state = {
-      favorite: false
+      favorite: !!props.initial
     };
   }
 

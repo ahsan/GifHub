@@ -33,13 +33,14 @@ class GHImageList extends React.Component {
   }
 
   render() {
-    return <div className="imageContainer">
+    return <div className="imageList mb-2">
       {
         this.props.images.map(imageUrl =>
           <GHImageCard 
             url={imageUrl}
             showIcon={this.props.userLoggedIn}
             handleIconClick={this.handleIconClick.bind(this)}
+            initial={this.props.initial}
           />
         )
       }

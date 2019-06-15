@@ -54,5 +54,4 @@ img {
 .iconRow {
   display: flex;
   flex-direction: row;
-  /* flex-direction: row-reverse; */
 }

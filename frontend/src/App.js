@@ -8,6 +8,7 @@ import "./App.css";
 
 import GHBody from "./components/GHBody";
 import GHLogin from "./components/GHLogin";
+import GHFavorites from "./components/GHFavorites";
 
 class App extends React.Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class App extends React.Component {
           </Navbar>
   
           <Route path="/" exact component={GHBody} />
+          <Route path="/favorites" exact component={GHFavorites} />
           <Route path="/login" exact component={GHLogin} />
         </div>
       </Router>

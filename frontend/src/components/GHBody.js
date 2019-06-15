@@ -33,7 +33,7 @@ class GHBody extends React.Component {
 
   searchGif(searchString) {
     const randomIndex = Math.floor(Math.random()*20);
-    const url = `https://api.tenor.com/v1/search?key=${process.env.REACT_APP_TENOR}&q=${searchString}&pos=${randomIndex}&pos&limit=1`;
+    const url = `https://api.tenor.com/v1/search?key=${process.env.REACT_APP_TENOR}&q=${searchString}&pos=${randomIndex}&pos&limit=5`;
     axios.get(url)
     .then(response => {
       console.log(response.data);
