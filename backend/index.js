@@ -18,4 +18,8 @@ require('./config/server')(app);
 require('./config/express')(app);
 
 
+// create User table
+const User = require('./db/users.model');
+User.createTable().then(() => {}).catch((err) => {});
+
 module.exports = app;
