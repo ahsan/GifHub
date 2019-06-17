@@ -1,0 +1,28 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: "gifhub-frontend-deployment"
+  labels:
+    app: "GifHub"
+    tier: "frontend"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "gifhub-frontend"
+  template:
+    metadata:
+      labels:
+        app: "gifhub-frontend"
+    spec:
+      containers:
+      - name: "gifhub-frontend"
+        image: abdulah/gifhub-frontend:latest
+        imagePullPolicy: Always
+        env:
+        - name: REACT_APP_API_URL
+          value: acea15163914f11e987d6027cd9905f1-639674235.us-west-2.elb.amazonaws.com:3000
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP

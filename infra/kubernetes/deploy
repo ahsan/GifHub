@@ -1,0 +1,42 @@
+#!/bin/sh
+
+echo "Making backend deployment"
+kubectl apply -f ./backend.deployment.yaml
+
+echo "Making backend service"
+kubectl apply -f ./backend.service.yaml
+
+echo "Waiting for the backend service's ingress hostname..."
+external_ip=""
+while [ -z $external_ip ]; do
+  echo "."
+  external_ip=$(kubectl get svc gifhub-backend-svc --template="{{range .status.loadBalancer.ingress}}{{.hostname}}{{end}}")
+  [ -z "$external_ip" ] && sleep 5
+done
+# echo 'End point ready:' && echo $external_ip
+
+echo "Making a backup of the frontend.deployment.yaml"
+cp frontend.deployment.yaml frontend.deployment.yaml.bkp
+
+echo "Populating the endpoint in frontend.deployment.yaml"
+sed -i '' -e "s/PLACE_HOLDER_API_URL/$external_ip:3000/g" ./frontend.deployment.yaml
+
+echo "Making front-end deployment"
+kubectl apply -f ./frontend.deployment.yaml
+
+echo "Making front-end service"
+kubectl apply -f ./frontend.service.yaml
+
+echo "Waiting for the frontend service's ingress hostname..."
+external_ip_frontend=""
+while [ -z $external_ip_frontend ]; do
+  echo "."
+  external_ip_frontend=$(kubectl get svc gifhub-frontend-svc --template="{{range .status.loadBalancer.ingress}}{{.hostname}}{{end}}")
+  [ -z "$external_ip_frontend" ] && sleep 5
+done
+
+echo
+echo "--------------------------------------------------------------------------------------------------------------"
+echo "The application should be available on the following hostname in a few minutes (AWS DNS introduces some delay)"
+echo "=====>       $external_ip_frontend"
+echo "--------------------------------------------------------------------------------------------------------------"

@@ -8,4 +8,6 @@ WORKDIR /opt/exchange/
 RUN npm install
 RUN npm install -g pm2
 
+EXPOSE 3000
+
 CMD ["pm2", "start", "./index.js", "--no-daemon"]
