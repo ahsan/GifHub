@@ -1,0 +1,20 @@
+#!/bin/sh
+
+echo "Initializing terraform"
+terraform init
+
+echo "Planning"
+terraform plan
+
+echo "Applying"
+terraform apply -auto-approve
+
+echo "Making backup of kubeconfig"
+cp ~/.kube/config ~/.kube/config.bkp
+
+echo "Writing kubeconfig output"
+terraform output kubeconfig > ~/.kube/config
+
+echo "Applying config map"
+terraform output config_map_aws_auth > config_map_aws_auth.yaml
+kubectl apply -f config_map_aws_auth.yaml
