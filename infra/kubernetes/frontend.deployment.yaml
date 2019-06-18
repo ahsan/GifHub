@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: "gifhub-frontend"
-        image: abdulah/gifhub-frontend:latest
+        image: "abdulah/gifhub-frontend"
         imagePullPolicy: Always
         env:
         - name: REACT_APP_API_URL

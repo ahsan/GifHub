@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: "gifhub-backend"
-        image: abdulah/gifhub-backend
+        image: "abdulah/gifhub-backend"
         imagePullPolicy: Always
         env:
         - name: DYNAMODB_ACCESS_KEY_ID
