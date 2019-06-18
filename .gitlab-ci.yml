@@ -35,15 +35,16 @@ backend:
     
 # This job deploys the application
 deploy:
-  image: alpine:3.7
+  image: ubuntu:latest
   stage: deploy_app
   script:
-    - apk update && apk add --no-cache curl
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
     - mkdir -p $HOME/.kube
     - echo -n $KUBE_CONFIG | base64 -d > $HOME/.kube/config
-    - kubectl config view
+    - curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/aws-iam-authenticator
+    - chmod +x ./aws-iam-authenticator && mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+    # - kubectl config view
     - cd ./infra/kubernetes
     - ./deploy_app
   only:
