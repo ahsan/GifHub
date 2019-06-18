@@ -34,7 +34,7 @@ backend:
 
     
 # This job deploys the application
-backend:
+deploy:
   image: alpine:3.7
   stage: deploy_app
   script:
