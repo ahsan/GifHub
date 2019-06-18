@@ -1,0 +1,50 @@
+stages:
+    - build_image
+    - deploy_app
+
+# This job builds and publishes the frontend image
+frontend:
+  image: docker:latest
+  stage: build_image
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  script:
+    - cd ./frontend
+    - docker build -t "abdulah/gifhub_frontend:$CI_COMMIT_SHA" .
+    - docker push "abdulah/gifhub_frontend:$CI_COMMIT_SHA"
+  only:
+    - master
+    
+# This job builds and publishes the backend image
+backend:
+  image: docker:latest
+  stage: build_image
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  script:
+    - cd ./backend
+    - docker build -t "abdulah/gifhub_backend:$CI_COMMIT_SHA" .
+    - docker push "abdulah/gifhub_backend:$CI_COMMIT_SHA"
+  only:
+    - master
+
+    
+# This job deploys the application
+backend:
+  image: alpine:3.7
+  stage: deploy_app
+  script:
+    - apk update && apk add --no-cache curl
+    - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
+    - mkdir -p $HOME/.kube
+    - echo -n $KUBE_CONFIG | base64 -d > $HOME/.kube/config
+    - kubectl config view
+    - cd ./infra/kubernetes
+    - ./deploy_app
+  only:
+    - master

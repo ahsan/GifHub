@@ -21,7 +21,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: REACT_APP_API_URL
-          value: acea15163914f11e987d6027cd9905f1-639674235.us-west-2.elb.amazonaws.com:3000
+          value: PLACE_HOLDER_API_URL
         ports:
         - name: http
           containerPort: 3000
