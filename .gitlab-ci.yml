@@ -16,6 +16,7 @@ frontend:
     - docker push "abdulah/gifhub_frontend:$CI_COMMIT_SHA"
   only:
     - master
+    - gitlab
     
 # This job builds and publishes the backend image
 backend:
