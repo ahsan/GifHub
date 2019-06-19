@@ -13,7 +13,7 @@ class GHFavorites extends React.Component {
   }
 
   componentDidMount() {
-    const apiUrl = `${process.env.REACT_APP_API_URL}/user?userEmail=${this.props.userEmail}`;
+    const apiUrl = `/api/user?userEmail=${this.props.userEmail}`;
     axios
       .get(apiUrl)
       .then((response) => {
