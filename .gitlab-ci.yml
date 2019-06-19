@@ -14,6 +14,7 @@ frontend:
     - cd ./frontend
     - docker build -t "abdulah/gifhub_frontend:$CI_COMMIT_SHA" -t "abdulah/gifhub_frontend:latest" .
     - docker push "abdulah/gifhub_frontend:$CI_COMMIT_SHA"
+    - docker push "abdulah/gifhub_frontend:latest"
   only:
     - master
     - gitlab
@@ -30,6 +31,7 @@ backend:
     - cd ./backend
     - docker build -t "abdulah/gifhub_backend:$CI_COMMIT_SHA" -t "abdulah/gifhub_backend:latest" .
     - docker push "abdulah/gifhub_backend:$CI_COMMIT_SHA"
+    - docker push "abdulah/gifhub_backend:latest"
   only:
     - master
     - gitlab
