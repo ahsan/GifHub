@@ -22,9 +22,9 @@ done
 # echo 'End point ready:' && echo $external_ip
 
 echo "Populating env vars in frontend.deployment.populated.yaml"
-sed -i '' -e "s/abdulah\/gifhub-frontend/abdulah\/gifhub-frontend:$CI_COMMIT_SHA/g" ./frontend.deployment.populated.yaml
+sed -i -e "s/abdulah\/gifhub-frontend/abdulah\/gifhub-frontend:$CI_COMMIT_SHA/g" ./frontend.deployment.populated.yaml
 cp frontend.deployment.yaml frontend.deployment.yaml.bkp
-sed -i '' -e "s/PLACE_HOLDER_API_URL/$external_ip:3000/g" ./frontend.deployment.yaml
+sed -i -e "s/PLACE_HOLDER_API_URL/$external_ip:3000/g" ./frontend.deployment.yaml
 
 echo "Making front-end deployment"
 kubectl apply -f ./frontend.deployment.yaml
