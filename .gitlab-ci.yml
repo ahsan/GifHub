@@ -54,5 +54,6 @@ deploy:
     - cd ./infra/kubernetes
     - ./deploy_app
   only:
-    - master
     - tags
+  except:
+    - branches
