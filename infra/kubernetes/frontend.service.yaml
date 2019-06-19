@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: "gifhub_frontend-svc"
+  name: "gifhub-frontend-svc"
 spec:
   selector:
-    app: "gifhub_frontend"
+    app: "gifhub-frontend"
   ports:
   - protocol: TCP
     port: 80
