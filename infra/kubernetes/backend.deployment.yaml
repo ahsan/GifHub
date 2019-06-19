@@ -17,13 +17,13 @@ spec:
     spec:
       containers:
       - name: "gifhub-backend"
-        image: "abdulah/gifhub-backend"
+        image: "abdulah/gifhub_backend"
         imagePullPolicy: Always
         env:
         - name: DYNAMODB_ACCESS_KEY_ID
           value: DYNAMODB_ACCESS_KEY_ID_PLACEHOLDER
         - name: DYNAMODB_SECRET_ACCESS_KEY
-          value: DYNAMODB_SECRET_ACCESS_KEY_PLACEHOLDER
+          value: DYNAMODB_SAK_PLACEHOLDER
         ports:
         - name: http
           containerPort: 3000

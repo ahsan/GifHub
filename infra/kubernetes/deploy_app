@@ -1,10 +1,13 @@
 #!/bin/sh
 
-echo "Populating env vars in backend.deployment.populated.yaml"
-cp backend.deployment.yaml backend.deployment.populated.yaml
-sed -i '' -e "s/abdulah\/gifhub-backend/abdulah\/gifhub-backend:$CI_COMMIT_SHA/g" ./backend.deployment.populated.yaml
-sed -i '' -e "s/DYNAMODB_ACCESS_KEY_ID_PLACEHOLDER/$DYNAMODB_ACCESS_KEY_ID/g" ./backend.deployment.populated.yaml
-sed -i '' -e "s/DYNAMODB_SECRET_ACCESS_KEY_PLACEHOLDER/$DYNAMODB_SECRET_ACCESS_KEY/g" ./backend.deployment.populated.yaml
+echo "Populating env vars in backend.deployment.yaml"
+cp backend.deployment.yaml backend.deployment.yaml.bkp
+sed -i "s/abdulah\/gifhub_backend/abdulah\/gifhub_backend:$CI_COMMIT_SHA/g" ./backend.deployment.yaml
+sed -i "s^DYNAMODB_SAK_PLACEHOLDER^$DYNAMODB_SECRET_ACCESS_KEY^g" ./backend.deployment.yaml
+sed -i "s^DYNAMODB_ACCESS_KEY_ID_PLACEHOLDER^$DYNAMODB_ACCESS_KEY_ID^g" ./backend.deployment.yaml
+
+echo "env vars populated"
+cat ./backend.deployment.yaml
 
 echo "Making backend deployment"
 kubectl apply -f ./backend.deployment.yaml
@@ -21,13 +24,13 @@ while [ -z $external_ip ]; do
 done
 # echo 'End point ready:' && echo $external_ip
 
-echo "Populating env vars in frontend.deployment.populated.yaml"
-sed -i '' -e "s/abdulah\/gifhub-frontend/abdulah\/gifhub-frontend:$CI_COMMIT_SHA/g" ./frontend.deployment.populated.yaml
-cp frontend.deployment.yaml frontend.deployment.populated.yaml
-sed -i '' -e "s/PLACE_HOLDER_API_URL/$external_ip:3000/g" ./frontend.deployment.populated.yaml
+echo "Populating env vars in frontend.deployment.yaml"
+sed -i -e "s/abdulah\/gifhub_frontend/abdulah\/gifhub_frontend:$CI_COMMIT_SHA/g" ./frontend.deployment.yaml
+cp frontend.deployment.yaml frontend.deployment.yaml.bkp
+sed -i -e "s/PLACE_HOLDER_API_URL/$external_ip:3000/g" ./frontend.deployment.yaml
 
 echo "Making front-end deployment"
-kubectl apply -f ./frontend.deployment.populated.yaml
+kubectl apply -f ./frontend.deployment.yaml
 
 echo "Making front-end service"
 kubectl apply -f ./frontend.service.yaml

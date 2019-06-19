@@ -14,7 +14,7 @@ class GHImageList extends React.Component {
 
   handleIconClick(url, liked) {
     console.log(`The user ${this.props.userEmail} liked the image ${url} : ${liked}`);
-    const apiUrl = `${process.env.REACT_APP_API_URL}/user/gif`;
+    const apiUrl = `http://${process.env.REACT_APP_API_URL}/user/gif`;
     const body = {
       "userEmail": this.props.userEmail,
       "gifUrl": url

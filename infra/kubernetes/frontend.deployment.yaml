@@ -17,12 +17,12 @@ spec:
     spec:
       containers:
       - name: "gifhub-frontend"
-        image: "abdulah/gifhub-frontend"
+        image: "abdulah/gifhub_frontend"
         imagePullPolicy: Always
         env:
         - name: REACT_APP_API_URL
           value: PLACE_HOLDER_API_URL
         ports:
         - name: http
-          containerPort: 3000
+          containerPort: 3006
           protocol: TCP
