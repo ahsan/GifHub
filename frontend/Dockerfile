@@ -10,6 +10,7 @@ RUN npm run build
 FROM nginx:1.15
 COPY --from=build-stage /app/build/ /usr/share/nginx/html
 # Copy the default nginx.conf provided by tiangolo/node-frontend
-COPY ./nginx.conf.tmpl /etc/nginx/conf.d/default.conf.tmpl
+# COPY ./nginx.conf.tmpl /etc/nginx/conf.d/default.conf.tmpl
+COPY ./nginx.conf.tmpl /etc/nginx/conf.d/default.conf
 
-CMD /bin/sh -c "envsubst < /etc/nginx/conf.d/default.conf.tmpl > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;' || cat /etc/nginx/conf.d/default.conf"
+# CMD /bin/sh -c "envsubst < /etc/nginx/conf.d/default.conf.tmpl > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;' || cat /etc/nginx/conf.d/default.conf"
