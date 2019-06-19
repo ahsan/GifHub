@@ -12,7 +12,7 @@ frontend:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
   script:
     - cd ./frontend
-    - docker build -t "abdulah/gifhub_frontend:$CI_COMMIT_SHA" .
+    - docker build -t "abdulah/gifhub_frontend:$CI_COMMIT_SHA" -t "abdulah/gifhub_frontend:latest" .
     - docker push "abdulah/gifhub_frontend:$CI_COMMIT_SHA"
   only:
     - master
@@ -27,7 +27,7 @@ backend:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
   script:
     - cd ./backend
-    - docker build -t "abdulah/gifhub_backend:$CI_COMMIT_SHA" .
+    - docker build -t "abdulah/gifhub_backend:$CI_COMMIT_SHA" -t "abdulah/gifhub_backend:latest" .
     - docker push "abdulah/gifhub_backend:$CI_COMMIT_SHA"
   only:
     - master
@@ -51,3 +51,4 @@ deploy:
     - ./deploy_app
   only:
     - master
+    - tags
