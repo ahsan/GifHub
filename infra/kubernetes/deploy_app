@@ -1,8 +1,8 @@
 #!/bin/sh
 
-echo "Populating env vars in backend.deployment.populated.yaml"
+echo "Populating env vars in backend.deployment.yaml"
 cp backend.deployment.yaml backend.deployment.yaml.bkp
-sed -i -e "s/abdulah\/gifhub-backend/abdulah\/gifhub-backend:$CI_COMMIT_SHA/g" ./backend.deployment.yaml
+sed -i -e "s/abdulah\/gifhub_backend/abdulah\/gifhub_backend:$CI_COMMIT_SHA/g" ./backend.deployment.yaml
 sed -i -e "s/DYNAMODB_ACCESS_KEY_ID_PLACEHOLDER/$DYNAMODB_ACCESS_KEY_ID/g" ./backend.deployment.yaml
 sed -i -e "s/DYNAMODB_SECRET_ACCESS_KEY_PLACEHOLDER/$DYNAMODB_SECRET_ACCESS_KEY/g" ./backend.deployment.yaml
 
@@ -16,13 +16,13 @@ echo "Waiting for the backend service's ingress hostname..."
 external_ip=""
 while [ -z $external_ip ]; do
   echo "."
-  external_ip=$(kubectl get svc gifhub-backend-svc --template="{{range .status.loadBalancer.ingress}}{{.hostname}}{{end}}")
+  external_ip=$(kubectl get svc gifhub_backend-svc --template="{{range .status.loadBalancer.ingress}}{{.hostname}}{{end}}")
   [ -z "$external_ip" ] && sleep 5
 done
 # echo 'End point ready:' && echo $external_ip
 
-echo "Populating env vars in frontend.deployment.populated.yaml"
-sed -i -e "s/abdulah\/gifhub-frontend/abdulah\/gifhub-frontend:$CI_COMMIT_SHA/g" ./frontend.deployment.populated.yaml
+echo "Populating env vars in frontend.deployment.yaml"
+sed -i -e "s/abdulah\/gifhub_frontend/abdulah\/gifhub_frontend:$CI_COMMIT_SHA/g" ./frontend.deployment.yaml
 cp frontend.deployment.yaml frontend.deployment.yaml.bkp
 sed -i -e "s/PLACE_HOLDER_API_URL/$external_ip:3000/g" ./frontend.deployment.yaml
 
@@ -36,7 +36,7 @@ echo "Waiting for the frontend service's ingress hostname..."
 external_ip_frontend=""
 while [ -z $external_ip_frontend ]; do
   echo "."
-  external_ip_frontend=$(kubectl get svc gifhub-frontend-svc --template="{{range .status.loadBalancer.ingress}}{{.hostname}}{{end}}")
+  external_ip_frontend=$(kubectl get svc gifhub_frontend-svc --template="{{range .status.loadBalancer.ingress}}{{.hostname}}{{end}}")
   [ -z "$external_ip_frontend" ] && sleep 5
 done
 

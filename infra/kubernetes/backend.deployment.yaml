@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: "gifhub-backend-deployment"
+  name: "gifhub_backend-deployment"
   labels:
     app: "GifHub"
     tier: "backend"
@@ -9,15 +9,15 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: "gifhub-backend"
+      app: "gifhub_backend"
   template:
     metadata:
       labels:
-        app: "gifhub-backend"
+        app: "gifhub_backend"
     spec:
       containers:
-      - name: "gifhub-backend"
-        image: "abdulah/gifhub-backend"
+      - name: "gifhub_backend"
+        image: "abdulah/gifhub_backend"
         imagePullPolicy: Always
         env:
         - name: DYNAMODB_ACCESS_KEY_ID

@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: "gifhub-frontend-deployment"
+  name: "gifhub_frontend-deployment"
   labels:
     app: "GifHub"
     tier: "frontend"
@@ -9,15 +9,15 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: "gifhub-frontend"
+      app: "gifhub_frontend"
   template:
     metadata:
       labels:
-        app: "gifhub-frontend"
+        app: "gifhub_frontend"
     spec:
       containers:
-      - name: "gifhub-frontend"
-        image: "abdulah/gifhub-frontend"
+      - name: "gifhub_frontend"
+        image: "abdulah/gifhub_frontend"
         imagePullPolicy: Always
         env:
         - name: REACT_APP_API_URL

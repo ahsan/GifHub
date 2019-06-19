@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: "gifhub-backend-svc"
+  name: "gifhub_backend-svc"
 spec:
   selector:
-    app: "gifhub-backend"
+    app: "gifhub_backend"
   ports:
   - protocol: TCP
     port: 3000
