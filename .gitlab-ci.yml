@@ -31,6 +31,7 @@ backend:
     - docker push "abdulah/gifhub_backend:$CI_COMMIT_SHA"
   only:
     - master
+    - gitlab
 
     
 # This job deploys the application
@@ -51,3 +52,4 @@ deploy:
     - ./deploy_app
   only:
     - master
+    - gitlab
