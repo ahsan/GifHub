@@ -1,3 +1,5 @@
+![](../infra.png)
+
 # Steps for Deployment
 
 > Note: These steps are for MacOS. Other OS's might have some variations.
