@@ -3,7 +3,7 @@
 echo "Populating env vars in backend.deployment.yaml"
 cp backend.deployment.yaml backend.deployment.yaml.bkp
 sed -i "s/abdulah\/gifhub_backend/abdulah\/gifhub_backend:$CI_COMMIT_SHA/g" ./backend.deployment.yaml
-sed -i "s/DYNAMODB_SAK_PLACEHOLDER/$DYNAMODB_SECRET_ACCESS_KEY/g" ./backend.deployment.yaml
+sed -i "s^DYNAMODB_SAK_PLACEHOLDER^$DYNAMODB_SECRET_ACCESS_KEY^g" ./backend.deployment.yaml
 sed -i "s^DYNAMODB_ACCESS_KEY_ID_PLACEHOLDER^$DYNAMODB_ACCESS_KEY_ID^g" ./backend.deployment.yaml
 
 echo "env vars populated"
