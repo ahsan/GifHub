@@ -12,7 +12,7 @@
 1. Install Terrafor by following [this guide](https://learn.hashicorp.com/terraform/getting-started/install.html).
 2. Navigate into the `./infra/terraform` directory and run the `deploy_infra` shell script.
 
-> Caution: this step might cause significant contributions to your AWS bill
+> Caution: this step might cause considerable contributions towards your AWS bill
 
 ```sh
 cd ./infra/terraform
