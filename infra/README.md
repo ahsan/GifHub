@@ -56,7 +56,9 @@ In order to setup Gitlab CI/CD that runs per commit, follow these steps.
 ```
 - DOCKER_USER                   # username for your Docker account 
 - DOCKER_PASS                   # password for your Docker account
-- DYNAMODB_ACCESS_KEY_ID        # these are the key pair for 
+- AWS_ACCESS_KEY_ID             # These are the key pair for
+- AWS_SECRET_ACCESS_KEY         # the AWS admin user created above
+- DYNAMODB_ACCESS_KEY_ID        # These are the key pair for 
 - DYNAMODB_SECRET_ACCESS_KEY    # the dynamodb user created above
 - KUBE_CONFIG                   # contents of ~/.kube/config
 ```

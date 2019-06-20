@@ -17,7 +17,7 @@ frontend:
     - docker push "abdulah/gifhub_frontend:latest"
   only:
     - master
-    - gitlab
+    - tags
     
 # This job builds and publishes the backend image
 backend:
@@ -34,7 +34,7 @@ backend:
     - docker push "abdulah/gifhub_backend:latest"
   only:
     - master
-    - gitlab
+    - tags
 
     
 # This job deploys the application
