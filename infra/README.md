@@ -2,6 +2,8 @@
 
 # Steps for Deployment
 
+> Please note that these steps (and scripts) have been mainly tested on Linux. Other OS's might warrant some minor changes.
+
 ## Infrastructure
 
 This portion will guide you through the process of bringing up the required AWS infrastructure using Terraform.
@@ -45,6 +47,24 @@ terraform apply
 
 This portion will guide you through the deployment of the application on EKS. There are a couple of ways to do this.
 
+### GitLab CI/CD (Recommended)
+
+In order to setup Gitlab CI/CD that runs per commit, follow these steps.
+
+1. Fork [ahsan/GifHub](https://www.github.com/ahsan/GifHub) and mirror it on GitLab (or clone it manually).
+2. In CI/CD settings of the GitLab project, populate the following variables:
+```
+- DOCKER_USER                   # username for your Docker account 
+- DOCKER_PASS                   # password for your Docker account
+- DYNAMODB_ACCESS_KEY_ID        # these are the key pair for 
+- DYNAMODB_SECRET_ACCESS_KEY    # the dynamodb user created above
+- KUBE_CONFIG                   # contents of ~/.kube/config
+```
+
+3. On each commit to the `master` branch, GitLab will create new images for both the components of the application, i.e backend and frontend.
+4. Whenever a new tag release is pushed to the repository, GitLab will deploy the latest version of the application on EKS.
+
+
 ### Manually
 1. Navigate to the `kubernetes` directory.
 ```
@@ -63,20 +83,3 @@ The script should perform the following steps:
 - Make a frontend `service`
 
 At the end, the script will give you the ingress endpoint for the front-end service. Copy and paste it into your browser. That's it! GifHub has been deployed on your AWS EKS.
-
-### GitLab CI/CD
-
-In order to setup Gitlab CI/CD that runs per commit, follow these steps.
-
-1. Fork [ahsan/GifHub](https://www.github.com/ahsan/GifHub) and mirror it on GitLab (or clone it manually).
-2. In CI/CD settings of the GitLab project, populate the following variables:
-```
-- DOCKER_USER                   # username for your Docker account 
-- DOCKER_PASS                   # password for your Docker account
-- DYNAMODB_ACCESS_KEY_ID        # these are the key pair for 
-- DYNAMODB_SECRET_ACCESS_KEY    # the dynamodb user created above
-- KUBE_CONFIG                   # contents of ~/.kube/config
-```
-
-3. On each commit to the `master` branch, GitLab will create new images for both the components of the application, i.e backend and frontend.
-4. Whenever a new tag release is pushed to the repository, GitLab will deploy the latest version of the application on EKS.
