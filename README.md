@@ -3,6 +3,8 @@
     <div>GifHub is a place to search for and store all your favorite gifs.</div>
 </div>
 
+Try out the [live](http://a3d165398960011e991390226f06d59b-258796704.us-west-2.elb.amazonaws.com/) version hosted on AWS EKS.
+
 # App Architecture
 The application consists of a React.js front-end and a Node.JS backend. Deployment of the infrastructure as well as the application is fully automated. Out of the box, the infrastructure is handled by **Terraform**. On the other hand, **Kubernetes** is being used for highly available and scalable application deployment. AWS's EKS is the base cloud platform. Although, with some modification, the application can be deployed on any infrastructure.
 
