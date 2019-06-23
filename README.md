@@ -1,7 +1,7 @@
 <div align="center">
     <img src="header.png" width="130">
     <div>GifHub is a place to search for and store all your favorite gifs.</div>
-    <div>Try out the [live](http://a3d165398960011e991390226f06d59b-258796704.us-west-2.elb.amazonaws.com/) version hosted on AWS EKS.</div>
+    <div>Try out the <a href="http://a3d165398960011e991390226f06d59b-258796704.us-west-2.elb.amazonaws.com/">live</a> version hosted on AWS EKS.</div>
 </div>
 
 
