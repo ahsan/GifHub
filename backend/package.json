@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/ahsan/gifhub#readme",
   "dependencies": {
-    "aws-sdk": "^2.476.0",
+    "aws-sdk": "^2.814.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
